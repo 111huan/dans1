@@ -22,10 +22,10 @@ public class ladder : MonoBehaviour
     {
         monitor();
     }
-
+    
     private void monitor()
     {
-        if(Mathf.Abs(me.position.x-transform.position.x)<=1.3 && Mathf.Abs(me.position.y - transform.position.y) <= 3)
+        if(Mathf.Abs(me.position.x-transform.position.x)<=1.3 && Mathf.Abs(me.position.y - transform.position.y) <= 3 && !Me.isClimbing && me.transform.position.y<-2 && transform.position.x>8)
         {
             obj.GetComponent<Renderer>().material.color = Color.green;
             climbable = true;

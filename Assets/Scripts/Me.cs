@@ -10,16 +10,17 @@ public class Me : MonoBehaviour
     public SpriteRenderer obj;
     public Transform zombie;
     bool isJumpable = true;
-    bool isClimbing = false;
+    public static bool isClimbing = false;
     public static bool isAttacked = false;
     public static bool attacking = false;
     float force = 300.0f;
     public float speed_x = 2f;
     public float speedY = 2f;
-    private bool isOnFixedLadder = false;
+    public static bool isOnFixedLadder = false;
     public bool isDrifting = false;
     public static bool equiped = false;
     public static bool haveKey = false;
+    private float attackTime = 0f;
     void Start()
     {
         isAttacked = false;
@@ -94,23 +95,22 @@ public class Me : MonoBehaviour
 
     void attack()
     {
-        bool isAttacking = false;
-        if (!isAttacking)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                isAttacking = true;
-                attacking = true;
-                anim.SetFloat("attacking", 1);
-                
-            }
-        }
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            isAttacking = false;
-            attacking = false;
-            anim.SetFloat("attacking", 0);
-        }
+         if (!attacking)
+         {
+             if (Input.GetKeyDown(KeyCode.F))
+             {
+                 attacking = true;
+                 attacking = true;
+                 anim.SetFloat("attacking", 1);
+                 attackTime = Time.time + 0.2f;
+             }
+         }
+         if (Time.time >= attackTime && attacking)
+         {
+             attacking = false;
+             attacking = false;
+             anim.SetFloat("attacking", 0);
+         }
     }
     void pickSword()
     {

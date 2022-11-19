@@ -20,7 +20,7 @@ public class zombieHealth : MonoBehaviour
         transform.position = new Vector3(zombie.position.x, zombie.position.y + 1f, 0);
         if (Me.attacking && Me.isAttacked)
         {
-            slider.value -=  3f * Time.deltaTime;
+            slider.value -=  9f * Time.deltaTime;
         }
         if (slider.value == 0)
         {

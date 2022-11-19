@@ -7,7 +7,6 @@ public class Key : MonoBehaviour
     Transform me, zombie;
     private SpriteRenderer obj;
     public static bool pickable = false;
-    // Start is called before the first frame update
     void Start()
     {
         obj = GetComponent<SpriteRenderer>();
@@ -16,15 +15,26 @@ public class Key : MonoBehaviour
         zombie = GameObject.Find("zombie").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (zombieHealth.zombieDie)
+       
+        if(Me.haveKey)
         {
-            transform.position = new Vector3(transform.position.x,5.6f, 0);
+            if (me.localScale.x > 0)
+            {
+                transform.position = new Vector3(me.position.x + 0.1f, me.position.y - 0.4f, 0);
+            }
+            else
+            {
+                transform.position = new Vector3(me.position.x, me.position.y - 0.4f, 0);
+            }
+        }
+        else if (zombieHealth.zombieDie)
+        {
+            transform.position = new Vector3(transform.position.x, 5.6f, 0);
             transform.localScale = new Vector3(3f, 3f, 0);
         }
-        else
+        else if (!zombieHealth.zombieDie)
         {
             if (zombie.localScale.x > 0)
             {
@@ -34,14 +44,13 @@ public class Key : MonoBehaviour
             {
                 transform.position = new Vector3(zombie.position.x - 0.27f, zombie.position.y - 0.3f, 0);
             }
-            
         }
         picked();
     }
 
     void picked()
     {
-        if (Mathf.Abs(me.position.x - transform.position.x) <= 0.3 && Mathf.Abs(me.position.y - transform.position.y) <= 0.5 && Me.equiped)
+        if (Mathf.Abs(me.position.x - transform.position.x) <= 0.3 && Mathf.Abs(me.position.y - transform.position.y) <= 0.5 && Me.equiped &&!Me.haveKey)
         {
             obj.material.color = Color.green;
             pickable = true;
@@ -54,7 +63,8 @@ public class Key : MonoBehaviour
         if (pickable && Input.GetKey(KeyCode.F))
         {
             pickable = false;
-            gameObject.SetActive(false);
+            obj.material.color = Color.white;
+            transform.localScale = new Vector3(2f, 2f, 0);
             Me.haveKey = true;
         }
     }
