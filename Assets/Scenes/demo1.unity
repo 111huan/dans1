@@ -5425,7 +5425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463951073}
   m_LocalRotation: {x: -0, y: -0, z: -0.009203194, w: -0.9999577}
-  m_LocalPosition: {x: -5.8, y: 6, z: 0}
+  m_LocalPosition: {x: -13.42, y: -3.02, z: 0}
   m_LocalScale: {x: -2.3, y: 2.3, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6234,7 +6234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912526531}
   m_LocalRotation: {x: -0.01011063, y: -0.036203917, z: -0.4581605, w: 0.88807434}
-  m_LocalPosition: {x: -5.11, y: 5.67, z: -4.62}
+  m_LocalPosition: {x: -2.33, y: -6.27, z: -3.85}
   m_LocalScale: {x: 2.3, y: 2.3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6746,7 +6746,7 @@ GameObject:
   - component: {fileID: 2051032067}
   - component: {fileID: 2051032066}
   m_Layer: 0
-  m_Name: fixedLadder (1)
+  m_Name: fixedLadder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
