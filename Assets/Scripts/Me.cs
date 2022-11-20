@@ -21,6 +21,7 @@ public class Me : MonoBehaviour
     public static bool equiped = false;
     public static bool haveKey = false;
     private float attackTime = 0f;
+    private float walkInSpeed = 0.05f;
     void Start()
     {
         isAttacked = false;
@@ -34,6 +35,10 @@ public class Me : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Door.opened)
+        {
+            StartCoroutine("WalkIn");
+        }
         if (equiped)
         {
             attack();
@@ -93,6 +98,16 @@ public class Me : MonoBehaviour
         }
     }
 
+    IEnumerator WalkIn()
+    {
+        Door.opened = false;
+        this.rigidbody.gravityScale = 0;
+        for (int i = 0; i < 30; i++)
+        {
+            transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y + 0.05f, 0);
+            yield return new WaitForSeconds(walkInSpeed);
+        }
+    }
     void attack()
     {
          if (!attacking)
@@ -100,14 +115,12 @@ public class Me : MonoBehaviour
              if (Input.GetKeyDown(KeyCode.F))
              {
                  attacking = true;
-                 attacking = true;
                  anim.SetFloat("attacking", 1);
                  attackTime = Time.time + 0.2f;
              }
          }
          if (Time.time >= attackTime && attacking)
          {
-             attacking = false;
              attacking = false;
              anim.SetFloat("attacking", 0);
          }

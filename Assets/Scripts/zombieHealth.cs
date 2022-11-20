@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class zombieHealth : MonoBehaviour
 {
-    private Transform zombie;
+    private Transform zombie,me;
     public static Slider slider;
     public static bool zombieDie = false;
     // Start is called before the first frame update
     void Start()
     {
+        me = GameObject.Find("me").transform;
         slider = GetComponent<Slider>();
         zombie = GameObject.Find("zombie").transform;
     }
@@ -18,7 +19,7 @@ public class zombieHealth : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(zombie.position.x, zombie.position.y + 1f, 0);
-        if (Me.attacking && Me.isAttacked)
+        if (Me.attacking && Mathf.Abs(me.transform.position.x - transform.position.x) <= 1)
         {
             slider.value -=  9f * Time.deltaTime;
         }

@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 {
     Transform me;
     public static bool openable = false;
+    public static bool opened = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class Door : MonoBehaviour
         if (openable && Input.GetKey(KeyCode.F))
         {
             openable = false;
+            opened = true;
             gameObject.SetActive(false);
         }
     }

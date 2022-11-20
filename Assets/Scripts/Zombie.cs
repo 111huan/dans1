@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Zombie : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Transform target;
+    public Transform target,me;
     public SpriteRenderer obj;
     public Transform leftpoint, rightpoint;
     public Animator anim;
@@ -18,6 +18,7 @@ public class Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        me = GameObject.Find("me").transform;
         obj = GetComponent<SpriteRenderer>();
         gameObject.SetActive(true);
         target = GameObject.Find("me").transform;
@@ -55,7 +56,7 @@ public class Zombie : MonoBehaviour
 
     void attacked()
     {
-        if (Me.isAttacked && Me.equiped)
+        if (Mathf.Abs(me.transform.position.x-transform.position.x)<=1 && Me.attacking)
         {
             float faceleft = 0f;
             if (transform.localScale.x > 0)
@@ -66,7 +67,7 @@ public class Zombie : MonoBehaviour
             {
                 faceleft = -1f;
             }
-            rb.AddForce(Vector2.right * faceleft * 80f);
+            rb.AddForce(Vector2.right * faceleft * 120f);
         }
     }
 
@@ -142,7 +143,7 @@ public class Zombie : MonoBehaviour
                 faceleft = -1f;
             }
             Debug.Log(faceleft);
-            rb.AddForce(Vector2.right * faceleft * 80f);
+            rb.AddForce(Vector2.right * faceleft * 120f);
         }
     }
 
