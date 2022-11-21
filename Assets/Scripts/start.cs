@@ -12,6 +12,10 @@ public class start : MonoBehaviour
         Me.attacking = false;
         zombieHealth.zombieDie = false;
         zombieHealth.slider.value = 1;
-        SceneManager.LoadScene("demo1");
+    }
+
+    public void backTooMenu()
+    {
+        SceneManager.LoadScene("start");
     }
 }

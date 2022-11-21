@@ -10,14 +10,14 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(true);
+        transform.localScale = new Vector3(3, 3, 0);
         me = GameObject.Find("me").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Me.haveKey && me.position.x<=-12f && me.position.x >= -14f)
+        if (Me.haveKey && me.position.x<=-12f && me.position.x >= -14f)
         {
             openable = true;
         }
@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
         {
             openable = false;
             opened = true;
-            gameObject.SetActive(false);
+            transform.localScale = new Vector3(0, 3, 0);
         }
     }
 }
