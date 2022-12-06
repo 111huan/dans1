@@ -22,6 +22,7 @@ public class Me : MonoBehaviour
     public static bool haveKey = false;
     private float attackTime = 0f;
     private float walkInSpeed = 0.05f;
+    public static Vector3 startClimbPosition;
     void Start()
     {
         isAttacked = false;
@@ -60,33 +61,29 @@ public class Me : MonoBehaviour
         {
             isOnFixedLadder = false;
         }
-        if (isOnFixedLadder)
-        {
-            isClimbing = false;
-            climb();
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                isOnFixedLadder = false;
-                transform.position = new Vector3(6.3f, 6.1f, 0);
-                this.rigidbody.gravityScale = 3;
-            }
-        }
-        else if (isClimbing)
+        if (isClimbing)
         {
             climb();
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && Mathf.Abs(transform.position.y-ladder.bottom.position.y)<=1.5)//if me wanna back to ground
             {
                 isClimbing = false;
-                transform.position = new Vector3(ladder.bottom.position.x - 1.3f, ladder.bottom.position.y, 0);
+                transform.position = startClimbPosition;
+                this.rigidbody.gravityScale = 3;
+            }
+            else if(Input.GetKeyDown(KeyCode.F) && Mathf.Abs(transform.position.y - ladder.top.position.y) <= 1)
+            {
+                isClimbing = false;
+                transform.position = ladder.arrivePos;
                 this.rigidbody.gravityScale = 3;
             }
         }
-        else if (ladder.climbable && Input.GetKeyDown(KeyCode.F))
+        else if (ladder.climbable && Input.GetKeyDown(KeyCode.F))// if me is  ready to climb
         {
             isClimbing = true;
             ladder.climbable = false;
             transform.position = ladder.bottom.position;
             rigidbody.gravityScale = 0;
+            startClimbPosition = transform.position;
         }
         else
         {
@@ -102,11 +99,12 @@ public class Me : MonoBehaviour
     {
         Door.opened = false;
         this.rigidbody.gravityScale = 0;
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 5; i++)
         {
-            transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y + 0.05f, 0);
+            transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y + 0.01f, 0);
             yield return new WaitForSeconds(walkInSpeed);
         }
+        this.rigidbody.gravityScale = 3;
     }
     void attack()
     {
@@ -137,7 +135,6 @@ public class Me : MonoBehaviour
     {
         rigidbody.gravityScale = 0;
         float dst_x = speed_x * Time.deltaTime;
-        /*transform.position = new Vector3(transform.position.x, Pool.surface, 0);*/
         Vector2 pos = transform.position;
         if (Input.GetKey(KeyCode.D))
         {
@@ -203,15 +200,15 @@ public class Me : MonoBehaviour
     {
         Vector2 pos = this.transform.localPosition;
         float limitY = 0;
-        if (isOnFixedLadder)
+       /* if (isOnFixedLadder)
         {
             limitY = 5.5f;
         }
         else
         {
             limitY = ladder.top.localPosition.y;
-        }
-        if (Input.GetKey(KeyCode.W)&&pos.y < limitY)
+        }*/
+        if (Input.GetKey(KeyCode.W) && pos.y < ladder.top.position.y)
          {
                 pos.y += speedY * Time.deltaTime;
                 this.transform.localPosition = pos;

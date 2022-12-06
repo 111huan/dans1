@@ -9,7 +9,7 @@ public class Zombie : MonoBehaviour
     public SpriteRenderer obj;
     public Transform leftpoint, rightpoint;
     public Animator anim;
-    private bool faceLeft = false;
+    private bool faceLeft = false,stop = false;
     public float speed = 5;
     private float leftx, rightx;
     private float vision = 3;
@@ -40,7 +40,7 @@ public class Zombie : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        if (Mathf.Abs(target.position.x - transform.position.x) > vision)
+        if (Mathf.Abs(target.position.x - transform.position.x) > vision && !stop)
         {
             move();
         }
@@ -145,6 +145,10 @@ public class Zombie : MonoBehaviour
             Debug.Log(faceleft);
             rb.AddForce(Vector2.right * faceleft * 120f);
         }
+        if(collision.gameObject.tag == "balloon")
+        {
+            stop = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -152,6 +156,10 @@ public class Zombie : MonoBehaviour
         if (collision.gameObject.tag == "me")
         {
             obj.material.color = Color.white;
+        }
+        if (collision.gameObject.tag == "balloon")
+        {
+            stop = false;
         }
     }
 }

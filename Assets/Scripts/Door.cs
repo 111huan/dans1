@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    Transform me;
+    Transform me, left, right;
     public static bool openable = false;
     public static bool opened = false;
     // Start is called before the first frame update
@@ -12,12 +12,14 @@ public class Door : MonoBehaviour
     {
         transform.localScale = new Vector3(3, 3, 0);
         me = GameObject.Find("me").transform;
+        left = GameObject.Find("doorL").transform;
+        right = GameObject.Find("doorR").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Me.haveKey && me.position.x<=-12f && me.position.x >= -14f)
+        if (Me.haveKey && me.position.x<= right.position.x && me.position.x >= left.position.x)
         {
             openable = true;
         }

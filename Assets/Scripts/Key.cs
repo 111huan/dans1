@@ -31,7 +31,7 @@ public class Key : MonoBehaviour
         }
         else if (zombieHealth.zombieDie)
         {
-            transform.position = new Vector3(transform.position.x, 5.6f, 0);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
             transform.localScale = new Vector3(3f, 3f, 0);
         }
         else if (!zombieHealth.zombieDie)
