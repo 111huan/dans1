@@ -13,10 +13,10 @@ public class Balloon : MonoBehaviour
     {
         gameObject.SetActive(true);
         me = GameObject.Find("me").transform;
-        left = GameObject.Find("balloonL").transform;
+       /* left = GameObject.Find("balloonL").transform;
         right = GameObject.Find("balloonR").transform;
-        leftX = left.position.x;
-        rightX = right.position.x;
+        leftX = left.localPosition.x;
+        rightX = right.localPosition.x;*/
         pos = transform.position;
     }
 
@@ -26,18 +26,18 @@ public class Balloon : MonoBehaviour
         move();
         if(Me.attacking && Mathf.Abs(transform.position.x-me.position.x)<= 3 && Mathf.Abs(transform.position.y - me.position.y) <= 3)
         {
-            Debug.Log("111");
             gameObject.SetActive(false);
         }
     }
 
     void move()
     {
+        pos = transform.position;
         if (faceLeft)
         {
             pos.x -= speed * Time.deltaTime;
-            this.transform.localPosition = pos;
-            if (transform.position.x <= leftX)
+            this.transform.position = pos;
+            if (transform.position.x <= 2)
             {
                 faceLeft = false;
             }
@@ -45,8 +45,8 @@ public class Balloon : MonoBehaviour
         else
         { 
             pos.x += speed * Time.deltaTime;
-            this.transform.localPosition = pos;
-            if (transform.position.x > rightX)
+            this.transform.position = pos;
+            if (transform.position.x > 11)
             {
                 faceLeft = true;
             }

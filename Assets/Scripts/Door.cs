@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     Transform me, left, right;
@@ -32,6 +34,29 @@ public class Door : MonoBehaviour
             openable = false;
             opened = true;
             transform.localScale = new Vector3(0, 3, 0);
+            upload();
+        }
+    }
+
+    void upload()
+    {
+        int nowScene = 0;
+
+        string path = Application.dataPath + "/Resources/history.txt";
+        string[] download = File.ReadAllLines(path);
+        if(SceneManager.GetActiveScene().name == "demo1")
+        {
+            nowScene = 1;
+        }
+        else if(SceneManager.GetActiveScene().name == "demo2")
+        {
+            nowScene = 2;
+        }
+
+        if (nowScene > int.Parse(download[0]))//if present level is greater than the record
+        {
+            string[] lines = { nowScene.ToString() };
+            File.WriteAllLines(path,lines);//update record
         }
     }
 }
