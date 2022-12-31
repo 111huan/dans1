@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonToDemo2 : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
         if (choose.record < 1)
         {
@@ -14,6 +14,7 @@ public class ButtonToDemo2 : MonoBehaviour
         }
         else
         {
+            Debug.Log("aaa");
             this.GetComponent<Button>().interactable = true;
         }
     }

@@ -5,8 +5,8 @@ using System.IO;
 
 public class choose : MonoBehaviour
 {
-    public static int record = 0;
-    // Start is called before the first frame update
+    public static int record;
+    // Start is called before the first frame update   
     void Start()
     {
         download();
