@@ -9,6 +9,7 @@ public class Key : MonoBehaviour
     public static bool pickable = false;
     void Start()
     {
+        pickable = false;
         obj = GetComponent<SpriteRenderer>();
         gameObject.SetActive(true);
         me = GameObject.Find("me").transform;

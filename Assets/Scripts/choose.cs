@@ -13,8 +13,8 @@ public class choose : MonoBehaviour
     }
     public void download()
     {
-        string path = Application.dataPath + "/Resources/history.txt";
-        string[] download = File.ReadAllLines(path);
-        record = int.Parse(download[0].ToString());
+        /*string path = Application.dataPath + "/Resources/history.txt";
+        string[] download = File.ReadAllLines(path);*/
+        record = PlayerPrefs.GetInt("nowScene");
     }
 }

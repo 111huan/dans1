@@ -23,8 +23,10 @@ public class Me : MonoBehaviour
     private float attackTime = 0f;
     private float walkInSpeed = 0.05f;
     public static Vector3 startClimbPosition;
+    //public static bool goToNext = false;
     void Start()
     {
+        haveKey = false;
         isAttacked = false;
         attacking = false;
         equiped = false;
@@ -105,6 +107,9 @@ public class Me : MonoBehaviour
             yield return new WaitForSeconds(walkInSpeed);
         }
         this.rigidbody.gravityScale = 3;
+        /*this.transform.position = Vector3.MoveTowards(this.transform.position,new Vector3(-14,7.5f,0),Time.deltaTime);
+        goToNext = true;
+        yield return new WaitForSeconds(walkInSpeed);*/
     }
     void attack()
     {

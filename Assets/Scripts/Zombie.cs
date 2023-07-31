@@ -18,6 +18,7 @@ public class Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stop = false;
         me = GameObject.Find("me").transform;
         obj = GetComponent<SpriteRenderer>();
         gameObject.SetActive(true);
@@ -29,6 +30,7 @@ public class Zombie : MonoBehaviour
        // transform.DetachChildren();
         Destroy(leftpoint.gameObject);
         Destroy(rightpoint.gameObject);
+        transform.localPosition = transform.localPosition;
         transform.localScale = new Vector3(-2.7f, 2.7f, 0);
     }
 
@@ -38,7 +40,9 @@ public class Zombie : MonoBehaviour
         attacked();
         if (zombieHealth.zombieDie)
         {
-            gameObject.SetActive(false);
+            print("zombieHealth.zombieDie");
+            transform.localPosition = new Vector3(-1000, -1000, 0);
+            //transform.localScale = new Vector3(0, 0, 0);
         }
         if (Mathf.Abs(target.position.x - transform.position.x) > vision && !stop)
         {

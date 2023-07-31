@@ -9,4 +9,9 @@ public class changeScene1 : MonoBehaviour
     {
         SceneManager.LoadScene("demo1");
     }
+
+    public static void backToMenu()
+    {
+        SceneManager.LoadScene("start");
+    }
 }
